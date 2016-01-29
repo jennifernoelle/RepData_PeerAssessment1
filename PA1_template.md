@@ -103,7 +103,8 @@ naPerDay <- tapply(activity$steps, activity$date, function(x){sum(is.na(x))})
 
 par(mfrow=c(2,1))
 plot(row.names(naPerInterval), naPerInterval, xlab="Interval",
-     ylab="Count", main = "NA per interval")
+     ylab="Count", main = "NA per interval",
+     col=rgb(red=0, green=0, blue=0, alpha=0.25))
 plot(as.Date(row.names(naPerDay)), naPerDay, xlab="Date", ylab="Count", 
      main = "NA per Day")
 ```
@@ -249,7 +250,8 @@ h <- qplot(interval, avgSteps, data=activityDays, facets = weekendWeekday~.,
            geom="line")
 h + geom_line(colour="blue") + # add line between points
         geom_line(aes(y=means), color = "red") + # add mean lines
-        labs(y="Number of Steps", title="Weekday and Weekend Activity") + 
+        labs(x="Interval", 
+                y="Number of Steps", title="Weekday and Weekend Activity") + 
         theme_bw() +  # change to barebones theme 
         theme(
                 plot.margin = unit(c(2,2,2,2), "cm"), # widen top margin
@@ -257,8 +259,6 @@ h + geom_line(colour="blue") + # add line between points
 ```
 
 ![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png) 
-The mean steps per interval on weekdays is 35.61 and the
-mean steps per interval on weekends is slightly greater at 42.37.
-Additionally, there is a more pronounced activity spike between the 800 and 900 
-intervals of weekday days, corresponding to 8:00-9:00 AM, compared to weekend days, 
+
+Activity is slightly higher on weekends: the mean steps per interval on weekdays is 35.61 and the mean steps per interval on weekends is greater at 42.37. Additionally, there is a more pronounced activity spike between the 800 and 900 intervals of weekday days, corresponding to 8:00-9:00 AM, compared to weekend days,
 likely due to morning work preparations on weekdays only. 
